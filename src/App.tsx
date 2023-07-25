@@ -10,14 +10,14 @@ function App() {
   return (
     <>
       {/* This is the background */}
-      <section className="absolute w-screen h-screen bg-black">
+      <section className="absolute h-screen w-screen bg-black">
         <ThreeCanvas />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-6xl text-white font-light">Alex Muzzy</h1>;
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+          <h1 className="text-6xl font-light text-white">Alex Muzzy</h1>;
         </div>
 
         <button
-          className="absolute top-10 right-10 rounded-2xl bg-slate-600/25 text-white/75 p-3 text-xl backdrop-blur-md"
+          className="absolute right-10 top-10 rounded-2xl bg-slate-600/25 p-3 text-xl text-white/75 backdrop-blur-md"
           onClick={() => setIsVisible(!isVisible)}
         >
           See More
@@ -26,9 +26,9 @@ function App() {
 
       {/* This is the foreground */}
       <section className="h-screen w-screen">
-        <div className="flex h-full w-full justify-center items-center">
+        <div className="flex h-full w-full items-center justify-center">
           <Card isVisible={isVisible}>
-            <div className="flex flex-col items-center mt-6 p-4 rounded">
+            <div className="mt-6 flex flex-col items-center rounded p-4">
               <img src={profileImage} className="w-1/4 rounded-full" />
               <p className="mt-4">Software Engineer</p>
             </div>
