@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ThreeCanvas } from "./ThreeCanvas";
 import Card from "./Card";
-
-import profileImage from "./assets/1654880800553.jpg";
+import Intro from "./Intro";
+import Contact from "./Contact";
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
@@ -13,7 +13,7 @@ function App() {
       <section className="absolute h-screen w-screen bg-black">
         <ThreeCanvas />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-          <h1 className="text-6xl font-light text-white">Alex Muzzy</h1>;
+          <h1 className="text-6xl font-light text-white">Alex Musgrove</h1>;
         </div>
 
         <button
@@ -27,11 +27,9 @@ function App() {
       {/* This is the foreground */}
       <section className="h-screen w-screen">
         <div className="flex h-full w-full items-center justify-center">
-          <Card isVisible={isVisible}>
-            <div className="mt-6 flex flex-col items-center rounded p-4">
-              <img src={profileImage} className="w-1/4 rounded-full" />
-              <p className="mt-4">Software Engineer</p>
-            </div>
+          <Card {...{ isVisible }}>
+            <Intro />
+            <Contact />
           </Card>
         </div>
       </section>

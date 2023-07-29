@@ -1,0 +1,4 @@
+.contactIcon:hover {
+    fill: grey;
+    transition: fill .3s;
+}
