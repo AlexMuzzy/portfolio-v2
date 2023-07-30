@@ -1,5 +1,3 @@
-import React from "react";
-
 const Projects = ({ displayNumber }: { displayNumber: number }) => {
   return (
     <div>
