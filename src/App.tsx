@@ -50,7 +50,7 @@ function App() {
       <section className="h-screen w-screen">
         <div className="flex h-full w-full items-center justify-center">
           <Card {...{ isVisible }}>
-            <div className="mb-6 py-4">
+            <div className="mb-6 flex h-full w-full flex-col justify-center py-4">
               <Carousel {...{ sections }} />
               <div className="my-4" />
               <Contact />
