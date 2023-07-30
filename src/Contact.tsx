@@ -31,7 +31,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="flex flex-row justify-center gap-8">
+    <div className="flex w-screen flex-row justify-center gap-8">
       {socialMediaIcons.map((socialMediaIcon) => {
         return (
           <a href={socialMediaIcon.link}>
