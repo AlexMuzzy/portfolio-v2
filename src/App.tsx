@@ -28,8 +28,11 @@ function App() {
       <section className="h-screen w-screen">
         <div className="flex h-full w-full items-center justify-center">
           <Card {...{ isVisible }}>
-            <Intro />
-            <Contact />
+            <div className="mb-6 py-4">
+              <Intro />
+              <div className="my-4" />
+              <Contact />
+            </div>
           </Card>
         </div>
       </section>
