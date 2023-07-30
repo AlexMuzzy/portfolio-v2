@@ -3,6 +3,7 @@ import { ThreeCanvas } from "./ThreeCanvas";
 import Card from "./Card";
 import Intro from "./Intro";
 import Contact from "./Contact";
+import Carousel from "./Carousel";
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
@@ -29,7 +30,9 @@ function App() {
         <div className="flex h-full w-full items-center justify-center">
           <Card {...{ isVisible }}>
             <div className="mb-6 py-4">
-              <Intro />
+              <Carousel>
+                <Intro />
+              </Carousel>
               <div className="my-4" />
               <Contact />
             </div>
