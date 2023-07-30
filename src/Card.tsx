@@ -11,7 +11,7 @@ const Card = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="rounded-xl border-2 border-slate-600/25 bg-slate-600/25 text-xl text-white/75 backdrop-blur-md"
+          className="flex h-4/6 w-4/6 items-center rounded-xl border-2 border-slate-600/25 bg-slate-600/25 text-xl text-white/75 backdrop-blur-md"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.2 }}

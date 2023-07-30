@@ -4,9 +4,30 @@ import Card from "./Card";
 import Intro from "./Intro";
 import Contact from "./Contact";
 import Carousel from "./Carousel";
+import Projects from "./Projects";
+
+export type SectionProps = {
+  name: string;
+  component: React.ReactNode;
+};
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
+
+  const sections: SectionProps[] = [
+    {
+      name: "Intro",
+      component: <Intro />,
+    },
+    {
+      name: "Projects1",
+      component: <Projects displayNumber={1} />,
+    },
+    {
+      name: "Projects2",
+      component: <Projects displayNumber={2} />,
+    },
+  ];
 
   return (
     <>
@@ -30,9 +51,7 @@ function App() {
         <div className="flex h-full w-full items-center justify-center">
           <Card {...{ isVisible }}>
             <div className="mb-6 py-4">
-              <Carousel>
-                <Intro />
-              </Carousel>
+              <Carousel {...{ sections }} />
               <div className="my-4" />
               <Contact />
             </div>
