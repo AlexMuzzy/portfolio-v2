@@ -2,10 +2,10 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const Card = ({
   children,
-  isVisible,
+  isVisible = true,
 }: {
   children?: React.ReactNode;
-  isVisible: Boolean;
+  isVisible?: Boolean;
 }) => {
   return (
     <AnimatePresence>

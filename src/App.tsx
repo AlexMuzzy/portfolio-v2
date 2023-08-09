@@ -20,12 +20,8 @@ function App() {
       component: <Intro />,
     },
     {
-      name: "Projects1",
-      component: <Projects displayNumber={1} />,
-    },
-    {
-      name: "Projects2",
-      component: <Projects displayNumber={2} />,
+      name: "Projects",
+      component: <Projects />,
     },
   ];
 
