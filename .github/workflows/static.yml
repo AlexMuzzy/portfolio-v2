@@ -31,12 +31,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+
+      # Run yarn install
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      # Run yarn build
+      - name: Build
+        uses: Borales/actions-yarn@v4
+        with:
+          cmd: run build # will run `yarn run build` command
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire dist directory
           path: .
       - name: Deploy to GitHub Pages
         id: deployment
