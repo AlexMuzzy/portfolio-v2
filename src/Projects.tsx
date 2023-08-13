@@ -93,7 +93,7 @@ const Projects = () => {
     },
   ];
   return (
-    <section className="flex flex-wrap overflow-hidden">
+    <div className="flex flex-wrap overflow-auto">
       {skills.map((skill) => (
         <div className="m-4 flex flex-col items-center justify-center rounded-md border p-2 shadow-md">
           <IconContext.Provider value={{ color: "white", size: "20" }}>
@@ -103,7 +103,7 @@ const Projects = () => {
           <p>{`${skill.name}`}</p>
         </div>
       ))}
-    </section>
+    </div>
   );
 };
 
