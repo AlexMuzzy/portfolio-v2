@@ -7,6 +7,8 @@ import { Mesh } from "three";
 export const ThreeCanvas = React.memo(() => {
   const numberOfSpheres = 300;
 
+  type SphereProps = {};
+
   const Sphere = ({
     position,
     radius,

@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { ThreeCanvas } from "./ThreeCanvas";
-import Card from "./Card";
-import Intro from "./Intro";
-import Contact from "./Contact";
-import Carousel from "./Carousel";
-import Projects from "./Projects";
-
-export type SectionProps = {
-  name: string;
-  component: React.ReactNode;
-};
+import { ThreeCanvas } from "./Background/ThreeCanvas";
+import Card from "./Components/Card";
+import Intro from "./Sections/Intro";
+import Carousel from "./Components/Carousel";
+import Projects from "./Sections/Projects";
+import Title from "./Background/Title";
+import { SectionProps } from "./types";
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
@@ -25,21 +21,22 @@ function App() {
     },
   ];
 
+  const PopOverButton = ({ label }: { label: string }) => (
+    <button
+      className="absolute right-10 top-10 rounded-2xl bg-slate-600/25 p-3 text-xl text-white/75 backdrop-blur-md"
+      onClick={() => setIsVisible(!isVisible)}
+    >
+      {label}
+    </button>
+  );
+
   return (
     <>
       {/* This is the background */}
       <section className="absolute h-screen w-screen bg-black">
         <ThreeCanvas />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-          <h1 className="text-6xl font-light text-white">Alex Musgrove</h1>;
-        </div>
-
-        <button
-          className="absolute right-10 top-10 rounded-2xl bg-slate-600/25 p-3 text-xl text-white/75 backdrop-blur-md"
-          onClick={() => setIsVisible(!isVisible)}
-        >
-          See More
-        </button>
+        <Title />
+        <PopOverButton label="See More" />
       </section>
 
       {/* This is the foreground */}
@@ -48,8 +45,6 @@ function App() {
           <Card {...{ isVisible }}>
             <div className="flex h-full flex-col justify-center py-4">
               <Carousel {...{ sections }} />
-              <div className="my-4" />
-              <Contact />
             </div>
           </Card>
         </div>

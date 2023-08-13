@@ -19,8 +19,15 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import { IconContext, IconType } from "react-icons";
+import useWindowDimensions from "../Components/UtilFunctions";
+import { useEffect, useState } from "react";
 
 const Projects = () => {
+  const { width } = useWindowDimensions();
+  const [iconSize, setIconSize] = useState<number>(20);
+
+  console.log(width);
+
   type SkillProps = {
     name: string;
     icon: IconType;
@@ -92,18 +99,34 @@ const Projects = () => {
       icon: FaJava,
     },
   ];
-  return (
-    <div className="flex flex-wrap overflow-auto">
-      {skills.map((skill) => (
-        <div className="m-4 flex flex-col items-center justify-center rounded-md border p-2 shadow-md">
-          <IconContext.Provider value={{ color: "white", size: "20" }}>
-            {<skill.icon />}
-          </IconContext.Provider>
 
-          <p>{`${skill.name}`}</p>
-        </div>
-      ))}
-    </div>
+  useEffect(() => {
+    if (width >= 640) {
+      // Responsive design small
+      setIconSize(40);
+    } else {
+      // Responsive design below small
+      setIconSize(28);
+    }
+  }, [width]);
+
+  return (
+    <section className="max-h-[50%] overflow-auto sm:max-h-full">
+      <h2 className="mt-4 text-2xl">Skills</h2>
+      <div className="flex flex-wrap">
+        {skills.map((skill) => (
+          <div className="m-4 flex flex-col items-center justify-center rounded-md border p-2 shadow-md">
+            <IconContext.Provider
+              value={{ color: "white", size: iconSize.toString() }}
+            >
+              {<skill.icon />}
+            </IconContext.Provider>
+
+            <p className="text-base sm:text-lg">{`${skill.name}`}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

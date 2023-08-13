@@ -3,7 +3,7 @@ import { IconContext } from "react-icons";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./Carousel.css";
-import { SectionProps } from "./App";
+import { SectionProps } from "../types";
 
 const Carousel = ({ sections }: { sections: SectionProps[] }) => {
   const [currentSection, setCurrentSection] = React.useState<SectionProps>(
@@ -52,11 +52,11 @@ const Carousel = ({ sections }: { sections: SectionProps[] }) => {
   };
 
   return (
-    <div className="flex max-h-[65%] flex-row items-center p-4">
+    <div className="flex flex-row items-center p-4">
       <ArrowWrapper onClick={handleLeftClick}>
         <HiArrowLeft className="text-4xl text-white/75" />
       </ArrowWrapper>
-      <div className="h-full overflow-auto">{currentSection.component}</div>
+      {currentSection.component}
       <ArrowWrapper onClick={handleRightClick}>
         <HiArrowRight className="text-4xl text-white/75" />
       </ArrowWrapper>

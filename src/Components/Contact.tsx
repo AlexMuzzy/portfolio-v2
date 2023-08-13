@@ -35,7 +35,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="flex flex-row justify-center gap-8">
+    <div className="flex justify-center gap-8">
       {socialMediaIcons.map((socialMediaIcon) => {
         return (
           <a
