@@ -52,7 +52,7 @@ const Carousel = ({ sections }: { sections: SectionProps[] }) => {
   };
 
   return (
-    <div className="flex flex-row items-center p-4">
+    <div className="flex flex-row items-center justify-center p-4">
       <ArrowWrapper onClick={handleLeftClick}>
         <HiArrowLeft className="text-4xl text-white/75" />
       </ArrowWrapper>
