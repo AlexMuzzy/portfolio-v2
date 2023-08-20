@@ -26,8 +26,6 @@ const Projects = () => {
   const { width } = useWindowDimensions();
   const [iconSize, setIconSize] = useState<number>(20);
 
-  console.log(width);
-
   type SkillProps = {
     name: string;
     icon: IconType;
