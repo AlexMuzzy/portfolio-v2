@@ -6,7 +6,6 @@ import Carousel from "./Components/Carousel";
 import Projects from "./Sections/Projects";
 import Title from "./Background/Title";
 import { SectionProps } from "./types";
-import BackgroundMenu from "./Sections/BackgroundMenu";
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
