@@ -10,7 +10,6 @@ import BackgroundMenu from "./Sections/BackgroundMenu";
 
 function App() {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
-
   const sections: SectionProps[] = [
     {
       name: "Intro",
@@ -20,10 +19,10 @@ function App() {
       name: "Projects",
       component: <Projects />,
     },
-    {
-      name: "BackgroundMenu",
-      component: <BackgroundMenu />,
-    },
+    // {
+    //   name: "BackgroundMenu",
+    //   component: <BackgroundMenu />,
+    // },
   ];
 
   const PopOverButton = ({ label }: { label: string }) => (
