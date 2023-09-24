@@ -23,7 +23,7 @@ const BackgroundMenu = ({
         id="number-of-particles"
         type="range"
         min={1}
-        max={200}
+        max={1000}
         value={settings.numberOfParticles}
         onChange={(e) =>
           settingsDispatch({

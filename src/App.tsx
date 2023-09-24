@@ -32,7 +32,7 @@ function settingsReducer(state: SettingsState, action: SettingsAction) {
 const App = () => {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
   const [settings, settingsDispatch] = useReducer(settingsReducer, {
-    numberOfParticles: 1000,
+    numberOfParticles: 300,
     fpsCounterChecked: false,
     colour: "white",
   });
@@ -52,7 +52,7 @@ const App = () => {
 
       {/* This is the background */}
       <section className="absolute h-screen w-screen bg-black">
-        <ThreeCanvas />
+        <ThreeCanvas {...{ settings }} />
         <Title />
         <PopOverButton label="See More" />
       </section>
