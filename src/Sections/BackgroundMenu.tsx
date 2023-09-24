@@ -149,7 +149,7 @@ const BackgroundMenu = ({
 
   return (
     <>
-      <section className="w-full p-3">
+      <section className="max-h-[70%] w-full overflow-auto p-3 sm:max-h-full">
         <h2 className="my-4 text-center text-2xl">Background Menu</h2>
         <p className="dark:text- py-3 text-center text-lg text-gray-400">
           Like the background? You can change the number of particles, the
