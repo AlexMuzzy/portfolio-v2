@@ -42,7 +42,7 @@ export const ThreeCanvas = React.memo(
       return (
         <mesh {...{ ref }} position={position}>
           <sphereGeometry args={[radius, width, height]} />
-          <meshPhongMaterial color="yellow" opacity={opacity} transparent />
+          <meshPhongMaterial color="lightblue" opacity={opacity} transparent />
         </mesh>
       );
     };
