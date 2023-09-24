@@ -15,7 +15,7 @@ const BackgroundMenu = ({
     <>
       <label
         htmlFor="number-of-particles"
-        className="my-2 block text-sm font-medium text-gray-900 dark:text-white"
+        className="my-2 block text-sm font-medium"
       >
         Number of Particles: {settings.numberOfParticles}
       </label>
@@ -88,7 +88,7 @@ const BackgroundMenu = ({
             className="z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
           >
             <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="py-2 text-sm"
               aria-labelledby="dropdownDividerButton"
             >
               {colours.map((colour) => {
@@ -138,7 +138,7 @@ const BackgroundMenu = ({
       />
       <label
         htmlFor="fps-counter-checkbox"
-        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        className="ml-2 text-sm font-medium"
       >
         Show FPS Counter
       </label>
