@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Stats } from "@react-three/drei";
+import { SettingsAction, SettingsState } from "../App";
 
-const BackgroundMenu = () => {
-  const [numberOfParticles, setNumberOfParticles] = useState(5);
-  const [isColourDropdownVisible, setIsColourDropdownVisible] =
-    React.useState(false);
-  const [fpsCounterChecked, setFpsCounterChecked] = useState(false);
+const BackgroundMenu = ({
+  settings,
+  settingsDispatch,
+}: {
+  settings: SettingsState;
+  settingsDispatch: React.Dispatch<SettingsAction>;
+}) => {
+  const [isColourDropdownVisible, setIsColourDropdownVisible] = useState(false);
 
   // Sourced from FlowBite's Tailwind CSS Min and Max Range
   const ParticleInput = () => (
@@ -14,15 +17,20 @@ const BackgroundMenu = () => {
         htmlFor="number-of-particles"
         className="my-2 block text-sm font-medium text-gray-900 dark:text-white"
       >
-        Number of Particles: {numberOfParticles}
+        Number of Particles: {settings.numberOfParticles}
       </label>
       <input
         id="number-of-particles"
         type="range"
         min={1}
         max={200}
-        value={numberOfParticles}
-        onChange={(e) => setNumberOfParticles(parseInt(e.target.value))}
+        value={settings.numberOfParticles}
+        onChange={(e) =>
+          settingsDispatch({
+            type: "SET_NUMBER_OF_PARTICLES",
+            payload: parseInt(e.target.value),
+          })
+        }
         className="mb-6 h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
       />
     </>
@@ -108,8 +116,13 @@ const BackgroundMenu = () => {
         id="fps-counter-checkbox"
         type="checkbox"
         className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-        checked={fpsCounterChecked}
-        onChange={() => setFpsCounterChecked(!fpsCounterChecked)}
+        checked={settings.fpsCounterChecked}
+        onChange={() =>
+          settingsDispatch({
+            type: "TOGGLE_FPS_COUNTER",
+            payload: !settings.fpsCounterChecked, // Flip the boolean
+          })
+        }
       />
       <label
         htmlFor="fps-counter-checkbox"
@@ -124,8 +137,6 @@ const BackgroundMenu = () => {
 
   return (
     <>
-      {fpsCounterChecked && <Stats />}
-
       <section className="w-full p-3">
         <h2 className="my-4 text-center text-2xl">Background Menu</h2>
         <ParticleInput />

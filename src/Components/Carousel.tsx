@@ -1,30 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./Carousel.css";
-import { SectionProps } from "../types";
+import { SettingsAction, SettingsState } from "../App";
+import Skills from "../Sections/Skills";
+import Intro from "../Sections/Intro";
+import BackgroundMenu from "../Sections/BackgroundMenu";
 
-const Carousel = ({ sections }: { sections: SectionProps[] }) => {
-  const [currentSection, setCurrentSection] = React.useState<SectionProps>(
-    sections[0], // Default to the first section
-  );
+const Carousel = ({
+  settings,
+  settingsDispatch,
+}: {
+  settings: SettingsState;
+  settingsDispatch: React.Dispatch<SettingsAction>;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const indexLength = 3;
 
   const handleLeftClick = () => {
-    const currentIndex = sections.indexOf(currentSection);
-    if (currentIndex === 0) {
-      setCurrentSection(sections[sections.length - 1]);
+    if (currentIndex <= 0) {
+      setCurrentIndex(indexLength - 1);
     } else {
-      setCurrentSection(sections[currentIndex - 1]);
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
   const handleRightClick = () => {
-    const currentIndex = sections.indexOf(currentSection);
-    if (currentIndex === sections.length - 1) {
-      setCurrentSection(sections[0]);
+    if (currentIndex >= indexLength - 1) {
+      setCurrentIndex(0);
     } else {
-      setCurrentSection(sections[currentIndex + 1]);
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
@@ -56,7 +63,11 @@ const Carousel = ({ sections }: { sections: SectionProps[] }) => {
       <ArrowWrapper onClick={handleLeftClick}>
         <HiArrowLeft className="text-4xl text-white/75" />
       </ArrowWrapper>
-      {currentSection.component}
+      {currentIndex === 0 && <Intro />}
+      {currentIndex === 1 && <Skills />}
+      {currentIndex === 2 && (
+        <BackgroundMenu {...{ settings, settingsDispatch }} />
+      )}
       <ArrowWrapper onClick={handleRightClick}>
         <HiArrowRight className="text-4xl text-white/75" />
       </ArrowWrapper>

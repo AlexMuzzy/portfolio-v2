@@ -22,7 +22,7 @@ import { IconContext, IconType } from "react-icons";
 import useWindowDimensions from "../Components/UtilFunctions";
 import { useEffect, useState } from "react";
 
-const Projects = () => {
+const Skills = () => {
   const { width } = useWindowDimensions();
   const [iconSize, setIconSize] = useState<number>(20);
 
@@ -128,4 +128,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Skills;

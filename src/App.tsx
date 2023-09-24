@@ -1,28 +1,41 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { ThreeCanvas } from "./Background/ThreeCanvas";
 import Card from "./Components/Card";
-import Intro from "./Sections/Intro";
 import Carousel from "./Components/Carousel";
-import Projects from "./Sections/Projects";
 import Title from "./Background/Title";
-import { SectionProps } from "./types";
+import { Stats } from "@react-three/drei";
 
-function App() {
+export type SettingsState = {
+  numberOfParticles: number;
+  fpsCounterChecked: boolean;
+  colour: string;
+};
+
+export type SettingsAction =
+  | { type: "SET_NUMBER_OF_PARTICLES"; payload: number }
+  | { type: "TOGGLE_FPS_COUNTER"; payload: boolean }
+  | { type: "SET_COLOUR"; payload: string };
+
+function settingsReducer(state: SettingsState, action: SettingsAction) {
+  switch (action.type) {
+    case "SET_NUMBER_OF_PARTICLES":
+      return { ...state, numberOfParticles: action.payload };
+    case "TOGGLE_FPS_COUNTER":
+      return { ...state, fpsCounterChecked: action.payload };
+    case "SET_COLOUR":
+      return { ...state, colour: action.payload };
+    default:
+      return state;
+  }
+}
+
+const App = () => {
   const [isVisible, setIsVisible] = useState<Boolean>(false);
-  const sections: SectionProps[] = [
-    {
-      name: "Intro",
-      component: <Intro />,
-    },
-    {
-      name: "Projects",
-      component: <Projects />,
-    },
-    // {
-    //   name: "BackgroundMenu",
-    //   component: <BackgroundMenu />,
-    // },
-  ];
+  const [settings, settingsDispatch] = useReducer(settingsReducer, {
+    numberOfParticles: 1000,
+    fpsCounterChecked: false,
+    colour: "white",
+  });
 
   const PopOverButton = ({ label }: { label: string }) => (
     <button
@@ -35,6 +48,8 @@ function App() {
 
   return (
     <>
+      {settings.fpsCounterChecked && <Stats />}
+
       {/* This is the background */}
       <section className="absolute h-screen w-screen bg-black">
         <ThreeCanvas />
@@ -47,13 +62,18 @@ function App() {
         <div className="flex h-full w-full items-center justify-center">
           <Card {...{ isVisible }}>
             <div className="flex h-full flex-col justify-center py-4">
-              <Carousel {...{ sections }} />
+              <Carousel
+                {...{
+                  settings,
+                  settingsDispatch,
+                }}
+              />
             </div>
           </Card>
         </div>
       </section>
     </>
   );
-}
+};
 
 export default App;
