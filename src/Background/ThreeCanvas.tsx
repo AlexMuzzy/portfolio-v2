@@ -5,6 +5,7 @@ import { Mesh } from "three";
 import { SettingsState } from "../App";
 
 // Using React.memo so the re render of the ThreeJs Canvas is skipped
+// when any state changes that are not related to the ThreeJs Canvas.
 export const ThreeCanvas = React.memo(
   ({ settings }: { settings: SettingsState }) => {
     const numberOfSpheres = settings.numberOfParticles;
@@ -42,7 +43,11 @@ export const ThreeCanvas = React.memo(
       return (
         <mesh {...{ ref }} position={position}>
           <sphereGeometry args={[radius, width, height]} />
-          <meshPhongMaterial color="lightblue" opacity={opacity} transparent />
+          <meshPhongMaterial
+            color={settings.colour}
+            opacity={opacity}
+            transparent
+          />
         </mesh>
       );
     };

@@ -34,7 +34,7 @@ const App = () => {
   const [settings, settingsDispatch] = useReducer(settingsReducer, {
     numberOfParticles: 300,
     fpsCounterChecked: false,
-    colour: "white",
+    colour: "lightblue",
   });
 
   const PopOverButton = ({ label }: { label: string }) => (

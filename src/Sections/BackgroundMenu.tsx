@@ -37,78 +37,90 @@ const BackgroundMenu = ({
   );
 
   // Sourced from FlowBite's Tailwind CSS Dropdown Divider
-  const ColourDropdown = () => (
-    <>
-      <button
-        id="dropdownDividerButton"
-        data-dropdown-toggle="dropdownDivider"
-        className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
-        onClick={() => setIsColourDropdownVisible(!isColourDropdownVisible)}
-      >
-        Colour Dropdown
-        <svg
-          className="ml-2.5 h-2.5 w-2.5"
-          aria-hidden="true"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
+  const ColourDropdown = () => {
+    const colours = [
+      {
+        name: "White",
+        value: "white",
+      },
+      {
+        name: "Blue",
+        value: "blue",
+      },
+      {
+        name: "Red",
+        value: "red",
+      },
+      {
+        name: "Light Blue",
+        value: "lightblue",
+      },
+    ];
 
-      {isColourDropdownVisible && (
-        <div
-          id="dropdownDivider"
-          className="z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
+    return (
+      <>
+        <button
+          id="dropdownDividerButton"
+          data-dropdown-toggle="dropdownDivider"
+          className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          type="button"
+          onClick={() => setIsColourDropdownVisible(!isColourDropdownVisible)}
         >
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdownDividerButton"
+          Colour Dropdown
+          <svg
+            className="ml-2.5 h-2.5 w-2.5"
+            aria-hidden="true"
+            fill="none"
+            viewBox="0 0 10 6"
           >
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                White
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Blue
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Red
-              </a>
-            </li>
-          </ul>
-          <div className="py-2">
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+        {isColourDropdownVisible && (
+          <div
+            id="dropdownDivider"
+            className="z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
+          >
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDividerButton"
             >
-              Rainbow
-            </a>
+              {colours.map((colour) => {
+                const isSelected = settings.colour === colour.value;
+
+                return (
+                  <>
+                    <li
+                      key={colour.name}
+                      className={`${
+                        isSelected // Highlight the selected colour
+                          ? "bg-gray-100 dark:bg-gray-600 dark:text-white"
+                          : ""
+                      } block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`}
+                      onClick={() =>
+                        settingsDispatch({
+                          type: "SET_COLOUR",
+                          payload: colour.value,
+                        })
+                      }
+                    >
+                      {colour.name}
+                    </li>
+                  </>
+                );
+              })}
+            </ul>
           </div>
-        </div>
-      )}
-    </>
-  );
+        )}
+      </>
+    );
+  };
 
   const FpsCounterCheckbox = () => (
     <div className="my-6 flex items-center">
@@ -139,6 +151,10 @@ const BackgroundMenu = ({
     <>
       <section className="w-full p-3">
         <h2 className="my-4 text-center text-2xl">Background Menu</h2>
+        <p className="dark:text- py-3 text-center text-lg text-gray-400">
+          Like the background? You can change the number of particles, the
+          colour, and even add an FPS counter!
+        </p>
         <ParticleInput />
         <ColourDropdown />
         <FpsCounterCheckbox />

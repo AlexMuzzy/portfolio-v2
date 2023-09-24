@@ -108,9 +108,11 @@ const Skills = () => {
     }
   }, [width]);
 
+  // Showcase of skills section
   return (
     <section className="max-h-[50%] overflow-auto sm:max-h-full">
       <h2 className="mt-4 text-2xl">Skills</h2>
+      <p className="text-lg">A showcase of a few skills I have:</p>
       <div className="flex flex-wrap">
         {skills.map((skill) => (
           <div className="m-4 flex flex-col items-center justify-center rounded-md border p-2 shadow-md">
