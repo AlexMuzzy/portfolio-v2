@@ -1,5 +1,5 @@
 import Contact from "../Components/Contact";
-import profileImage from "../assets/1654880800553.jpg";
+import profileImage from "../assets/1747910894012.jpeg";
 
 const Intro = () => (
   <section className="rounded-3xl border border-white/10 bg-black/30 p-8 backdrop-blur-md">
