@@ -106,7 +106,7 @@ const Skills = () => {
           <div key={category.name} className="group">
             <div className="mb-4 flex items-center gap-3">
               <div
-                className={`h-1.5 w-16 rounded-full bg-gradient-to-r ${category.color}`}
+                className={`h-1.5 w-16 rounded-full bg-linear-to-r ${category.color}`}
               />
               <h3 className="text-xl font-semibold text-white">
                 {category.name}
