@@ -1,23 +1,29 @@
 import {
   FaAws,
-  FaCss3,
   FaDocker,
   FaGit,
-  FaHtml5,
   FaJava,
   FaJenkins,
-  FaLinux,
-  FaNodeJs,
   FaPython,
   FaReact,
 } from "react-icons/fa";
-import { VscTerminalBash } from "react-icons/vsc";
 import {
   SiCplusplus,
   SiKubernetes,
   SiPostgresql,
   SiTypescript,
+  SiJavascript,
+  SiKotlin,
+  SiGo,
+  SiSpringboot,
+  SiNextdotjs,
+  SiMysql,
+  SiApachekafka,
+  SiGithubactions,
+  SiAmazondynamodb,
+  SiGooglecloud,
 } from "react-icons/si";
+import { TbSql } from "react-icons/tb";
 import { IconContext, IconType } from "react-icons";
 import useWindowDimensions from "../Components/UtilFunctions";
 import { useEffect, useState } from "react";
@@ -39,47 +45,57 @@ const Skills = () => {
 
   const skillCategories: SkillCategory[] = [
     {
-      name: "Frontend",
+      name: "Languages",
       color: "from-blue-500 to-cyan-500",
       skills: [
-        { name: "React", icon: FaReact },
-        { name: "TypeScript", icon: SiTypescript },
-        { name: "HTML", icon: FaHtml5 },
-        { name: "CSS", icon: FaCss3 },
-      ],
-    },
-    {
-      name: "Backend",
-      color: "from-green-500 to-emerald-500",
-      skills: [
-        { name: "Node.js", icon: FaNodeJs },
-        { name: "Python", icon: FaPython },
         { name: "Java", icon: FaJava },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "JavaScript", icon: SiJavascript },
+        { name: "Kotlin", icon: SiKotlin },
+        { name: "Go", icon: SiGo },
+        { name: "Python", icon: FaPython },
+        { name: "SQL", icon: TbSql },
         { name: "C++", icon: SiCplusplus },
       ],
     },
     {
-      name: "Database",
-      color: "from-purple-500 to-pink-500",
-      skills: [{ name: "PostgreSQL", icon: SiPostgresql }],
-    },
-    {
-      name: "DevOps & Cloud",
-      color: "from-orange-500 to-red-500",
+      name: "Libraries/Frameworks",
+      color: "from-green-500 to-emerald-500",
       skills: [
-        { name: "Docker", icon: FaDocker },
-        { name: "Kubernetes", icon: SiKubernetes },
-        { name: "AWS", icon: FaAws },
-        { name: "Jenkins", icon: FaJenkins },
+        { name: "Spring Boot", icon: SiSpringboot },
+        { name: "React", icon: FaReact },
+        { name: "React Native", icon: FaReact },
+        { name: "Next.js", icon: SiNextdotjs },
+        { name: "PostgreSQL", icon: SiPostgresql },
       ],
     },
     {
-      name: "Tools",
-      color: "from-slate-500 to-gray-500",
+      name: "Technologies",
+      color: "from-purple-500 to-pink-500",
       skills: [
+        { name: "Kafka", icon: SiApachekafka },
         { name: "Git", icon: FaGit },
-        { name: "Linux", icon: FaLinux },
-        { name: "Bash", icon: VscTerminalBash },
+        { name: "Docker", icon: FaDocker },
+        { name: "Jenkins", icon: FaJenkins },
+        { name: "Kubernetes", icon: SiKubernetes },
+        { name: "GitHub Actions", icon: SiGithubactions },
+      ],
+    },
+    {
+      name: "Databases",
+      color: "from-orange-500 to-red-500",
+      skills: [
+        { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "MySQL", icon: SiMysql },
+        { name: "DynamoDB", icon: SiAmazondynamodb },
+      ],
+    },
+    {
+      name: "Cloud",
+      color: "from-amber-500 to-yellow-500",
+      skills: [
+        { name: "AWS", icon: FaAws },
+        { name: "Google Cloud", icon: SiGooglecloud },
       ],
     },
   ];

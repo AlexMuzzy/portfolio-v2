@@ -6,8 +6,6 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 
-import "./Contact.css";
-
 const Contact = () => {
   const size = 42;
 
@@ -51,7 +49,7 @@ const Contact = () => {
                 color: "white",
               }}
             >
-              <socialMediaIcon.icon size={size} />
+              <socialMediaIcon.icon size={size} className="hover:fill-gray-400 hover:transition-all duration-300" />
             </IconContext.Provider>
           </a>
         );
