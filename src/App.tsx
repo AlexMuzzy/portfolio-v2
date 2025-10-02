@@ -1,78 +1,34 @@
-import { useReducer, useState } from "react";
 import { ThreeCanvas } from "./Background/ThreeCanvas";
-import Card from "./Components/Card";
-import Carousel from "./Components/Carousel";
+import ContentPanel from "./Components/ContentPanel";
 import Title from "./Background/Title";
-import { Stats } from "@react-three/drei";
+import ErrorBoundary from "./Components/ErrorBoundary";
 
 export type SettingsState = {
-  numberOfParticles: number;
-  fpsCounterChecked: boolean;
   colour: string;
 };
 
-export type SettingsAction =
-  | { type: "SET_NUMBER_OF_PARTICLES"; payload: number }
-  | { type: "TOGGLE_FPS_COUNTER"; payload: boolean }
-  | { type: "SET_COLOUR"; payload: string };
-
-function settingsReducer(state: SettingsState, action: SettingsAction) {
-  switch (action.type) {
-    case "SET_NUMBER_OF_PARTICLES":
-      return { ...state, numberOfParticles: action.payload };
-    case "TOGGLE_FPS_COUNTER":
-      return { ...state, fpsCounterChecked: action.payload };
-    case "SET_COLOUR":
-      return { ...state, colour: action.payload };
-    default:
-      return state;
-  }
-}
-
 const App = () => {
-  const [isVisible, setIsVisible] = useState<Boolean>(false);
-  const [settings, settingsDispatch] = useReducer(settingsReducer, {
-    numberOfParticles: 300,
-    fpsCounterChecked: false,
+  const settings: SettingsState = {
     colour: "lightblue",
-  });
-
-  const PopOverButton = ({ label }: { label: string }) => (
-    <button
-      className="absolute right-10 top-10 rounded-2xl bg-slate-600/25 p-3 text-xl text-white/75 backdrop-blur-md"
-      onClick={() => setIsVisible(!isVisible)}
-    >
-      {label}
-    </button>
-  );
+  };
 
   return (
-    <>
-      {settings.fpsCounterChecked && <Stats />}
+    <div className="relative min-h-screen w-screen overflow-x-hidden bg-black">
+      {/* 3D Background */}
+      <div className="fixed inset-0">
+        <ErrorBoundary>
+          <ThreeCanvas {...{ settings }} />
+        </ErrorBoundary>
+      </div>
 
-      {/* This is the background */}
-      <section className="absolute h-screen w-screen bg-black">
-        <ThreeCanvas {...{ settings }} />
+      {/* Content Overlay */}
+      <div className="relative z-10 flex min-h-screen w-full flex-col">
         <Title />
-        <PopOverButton label="See More" />
-      </section>
-
-      {/* This is the foreground */}
-      <section className="h-screen w-screen">
-        <div className="flex h-full w-full items-center justify-center">
-          <Card {...{ isVisible }}>
-            <div className="flex h-full flex-col justify-center py-4">
-              <Carousel
-                {...{
-                  settings,
-                  settingsDispatch,
-                }}
-              />
-            </div>
-          </Card>
+        <div className="flex flex-1 items-start justify-center px-4 pb-16 pt-8">
+          <ContentPanel />
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

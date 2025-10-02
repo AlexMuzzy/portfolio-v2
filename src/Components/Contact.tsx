@@ -41,6 +41,9 @@ const Contact = () => {
           <a
             href={socialMediaIcon.link}
             key={`media-icon-${socialMediaIcon.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit my ${socialMediaIcon.name} profile`}
           >
             <IconContext.Provider
               value={{
@@ -48,7 +51,7 @@ const Contact = () => {
                 color: "white",
               }}
             >
-              <socialMediaIcon.icon {...{ size }}></socialMediaIcon.icon>
+              <socialMediaIcon.icon size={size} />
             </IconContext.Provider>
           </a>
         );

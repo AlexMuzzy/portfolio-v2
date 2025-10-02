@@ -1,6 +1,8 @@
 const Title = () => (
-  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-    <h1 className="text-6xl font-light text-white">Alex Musgrove</h1>;
+  <div className="flex justify-center pt-8">
+    <h1 className="text-5xl font-light tracking-wider text-white drop-shadow-2xl md:text-6xl">
+      Alex Musgrove
+    </h1>
   </div>
 );
 

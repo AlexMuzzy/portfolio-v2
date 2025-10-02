@@ -1,86 +1,88 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React from "react";
-import { useRef } from "react";
+import { useRef, useMemo, memo } from "react";
 import { Mesh } from "three";
 import { SettingsState } from "../App";
 
-// Using React.memo so the re render of the ThreeJs Canvas is skipped
+// Using memo so the re render of the ThreeJs Canvas is skipped
 // when any state changes that are not related to the ThreeJs Canvas.
-export const ThreeCanvas = React.memo(
-  ({ settings }: { settings: SettingsState }) => {
-    const numberOfSpheres = settings.numberOfParticles;
+export const ThreeCanvas = memo(({ settings }: { settings: SettingsState }) => {
+  const numberOfSpheres = 300;
 
-    const Sphere = ({
-      position,
-      radius,
-      width,
-      height,
-      opacity,
-    }: {
-      position: [number, number, number];
-      radius: number;
-      width: number;
-      height: number;
-      opacity: number;
-    }) => {
-      const ref = useRef<Mesh>(null!);
+  // Memoize sphere data to prevent recalculation on every render
+  const sphereData = useMemo(() => {
+    return Array.from({ length: numberOfSpheres }, () => {
+      const x = Math.random() * 20 - 5;
+      const y = Math.random() * 20 - 5;
+      const z = Math.random() * 20 - 5;
+      const radius = Math.random() * 0.1;
+      const opacity = Math.max(Math.random(), 0.1);
 
-      useFrame(() => {
-        // Move the sphere around in a circle using trigonometry
-        const time = Date.now() * 0.0001;
-        const x = Math.sin(time) * position[0];
-        const z = Math.cos(time) * position[2];
+      return {
+        position: [x, y, z] as [number, number, number],
+        radius,
+        opacity,
+      };
+    });
+  }, [numberOfSpheres]);
 
-        ref.current.position.x = x;
-        ref.current.position.y = position[1];
-        ref.current.position.z = z;
+  const Sphere = ({
+    position,
+    radius,
+    opacity,
+  }: {
+    position: [number, number, number];
+    radius: number;
+    opacity: number;
+  }) => {
+    const ref = useRef<Mesh>(null!);
 
-        // Rotate the sphere
-        ref.current.rotation.x += 0.01;
-        ref.current.rotation.y += 0.005;
-      });
+    useFrame((state) => {
+      if (!ref.current) return;
 
-      return (
-        <mesh {...{ ref }} position={position}>
-          <sphereGeometry args={[radius, width, height]} />
-          <meshPhongMaterial
-            color={settings.colour}
-            opacity={opacity}
-            transparent
-          />
-        </mesh>
-      );
-    };
+      // Use Three.js clock for consistent timing
+      const time = state.clock.getElapsedTime() * 0.1;
+      const x = Math.sin(time) * position[0];
+      const z = Math.cos(time) * position[2];
+
+      ref.current.position.x = x;
+      ref.current.position.y = position[1];
+      ref.current.position.z = z;
+
+      // Rotate the sphere
+      ref.current.rotation.x += 0.01;
+      ref.current.rotation.y += 0.005;
+    });
 
     return (
-      <Canvas>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        {[...Array(numberOfSpheres)].map((_, i) => {
-          const x = Math.random() * 20 - 5;
-          const y = Math.random() * 20 - 5;
-          const z = Math.random() * 20 - 5;
-
-          const radius = Math.random() * 0.1;
-          const width = 32;
-          const height = 32;
-          let opacity = Math.random();
-
-          // Make sure opacity is not too low
-          opacity = opacity < 0.1 ? 0.1 : opacity;
-
-          return (
-            <Sphere
-              key={i}
-              position={[x, y, z]}
-              radius={radius}
-              width={width}
-              height={height}
-              opacity={opacity}
-            />
-          );
-        })}
-      </Canvas>
+      <mesh ref={ref} position={position}>
+        <sphereGeometry args={[radius, 16, 16]} />
+        <meshPhongMaterial
+          color={settings.colour}
+          opacity={opacity}
+          transparent
+        />
+      </mesh>
     );
-  },
-);
+  };
+
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 10] }}
+      style={{ background: "#000000" }}
+      gl={{ alpha: false }}
+    >
+      <color attach="background" args={["#000000"]} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.3} />
+      {sphereData.map((sphere, i) => (
+        <Sphere
+          key={i}
+          position={sphere.position}
+          radius={sphere.radius}
+          opacity={sphere.opacity}
+        />
+      ))}
+    </Canvas>
+  );
+});

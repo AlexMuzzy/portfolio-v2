@@ -31,70 +31,56 @@ const Skills = () => {
     icon: IconType;
   };
 
-  const skills: SkillProps[] = [
+  type SkillCategory = {
+    name: string;
+    color: string;
+    skills: SkillProps[];
+  };
+
+  const skillCategories: SkillCategory[] = [
     {
-      name: "React",
-      icon: FaReact,
+      name: "Frontend",
+      color: "from-blue-500 to-cyan-500",
+      skills: [
+        { name: "React", icon: FaReact },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "HTML", icon: FaHtml5 },
+        { name: "CSS", icon: FaCss3 },
+      ],
     },
     {
-      name: "TypeScript",
-      icon: SiTypescript,
+      name: "Backend",
+      color: "from-green-500 to-emerald-500",
+      skills: [
+        { name: "Node.js", icon: FaNodeJs },
+        { name: "Python", icon: FaPython },
+        { name: "Java", icon: FaJava },
+        { name: "C++", icon: SiCplusplus },
+      ],
     },
     {
-      name: "Node.js",
-      icon: FaNodeJs,
+      name: "Database",
+      color: "from-purple-500 to-pink-500",
+      skills: [{ name: "PostgreSQL", icon: SiPostgresql }],
     },
     {
-      name: "C++",
-      icon: SiCplusplus,
+      name: "DevOps & Cloud",
+      color: "from-orange-500 to-red-500",
+      skills: [
+        { name: "Docker", icon: FaDocker },
+        { name: "Kubernetes", icon: SiKubernetes },
+        { name: "AWS", icon: FaAws },
+        { name: "Jenkins", icon: FaJenkins },
+      ],
     },
     {
-      name: "Python",
-      icon: FaPython,
-    },
-    {
-      name: "PostgreSQL",
-      icon: SiPostgresql,
-    },
-    {
-      name: "Docker",
-      icon: FaDocker,
-    },
-    {
-      name: "Kubernetes",
-      icon: SiKubernetes,
-    },
-    {
-      name: "AWS",
-      icon: FaAws,
-    },
-    {
-      name: "Git",
-      icon: FaGit,
-    },
-    {
-      name: "Jenkins",
-      icon: FaJenkins,
-    },
-    {
-      name: "Linux",
-      icon: FaLinux,
-    },
-    {
-      name: "Bash",
-      icon: VscTerminalBash,
-    },
-    {
-      name: "HTML",
-      icon: FaHtml5,
-    },
-    {
-      name: "CSS",
-      icon: FaCss3,
-    },
-    {
-      name: "Java",
-      icon: FaJava,
+      name: "Tools",
+      color: "from-slate-500 to-gray-500",
+      skills: [
+        { name: "Git", icon: FaGit },
+        { name: "Linux", icon: FaLinux },
+        { name: "Bash", icon: VscTerminalBash },
+      ],
     },
   ];
 
@@ -110,19 +96,39 @@ const Skills = () => {
 
   // Showcase of skills section
   return (
-    <section className="max-h-[50%] overflow-auto sm:max-h-full">
-      <h2 className="mt-4 text-2xl">Skills</h2>
-      <p className="text-lg">A showcase of a few skills I have:</p>
-      <div className="flex flex-wrap">
-        {skills.map((skill) => (
-          <div className="m-4 flex flex-col items-center justify-center rounded-md border p-2 shadow-md">
-            <IconContext.Provider
-              value={{ color: "white", size: iconSize.toString() }}
-            >
-              {<skill.icon />}
-            </IconContext.Provider>
-
-            <p className="text-base sm:text-lg">{`${skill.name}`}</p>
+    <section className="rounded-3xl border border-white/10 bg-black/30 p-8 backdrop-blur-md">
+      <h2 className="mb-3 text-3xl font-bold text-white">Technical Skills</h2>
+      <p className="mb-8 text-lg text-white/90">
+        Technologies and tools I work with, organized by expertise area:
+      </p>
+      <div className="space-y-8">
+        {skillCategories.map((category) => (
+          <div key={category.name} className="group">
+            <div className="mb-4 flex items-center gap-3">
+              <div
+                className={`h-1.5 w-16 rounded-full bg-gradient-to-r ${category.color}`}
+              />
+              <h3 className="text-xl font-semibold text-white">
+                {category.name}
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {category.skills.map((skill) => (
+                <div
+                  key={skill.name}
+                  className="flex items-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 shadow-lg transition-all hover:scale-105 hover:border-white/40 hover:bg-white/10 hover:shadow-xl"
+                >
+                  <IconContext.Provider
+                    value={{ color: "white", size: iconSize.toString() }}
+                  >
+                    <skill.icon />
+                  </IconContext.Provider>
+                  <p className="text-base font-medium text-white sm:text-lg">
+                    {skill.name}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
