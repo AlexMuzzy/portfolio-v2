@@ -1,8 +1,6 @@
 import { IconContext } from "react-icons";
 import {
-  FaFacebookSquare,
   FaGithubSquare,
-  FaInstagramSquare,
   FaLinkedin,
 } from "react-icons/fa";
 
@@ -11,19 +9,9 @@ const Contact = () => {
 
   const socialMediaIcons = [
     {
-      name: "Facebook",
-      icon: FaFacebookSquare,
-      link: "https://www.facebook.com/AlexMuzey/",
-    },
-    {
       name: "Github",
       icon: FaGithubSquare,
       link: "https://github.com/AlexMuzzy",
-    },
-    {
-      name: "Instagram",
-      icon: FaInstagramSquare,
-      link: "https://www.instagram.com/alex.muzzy/",
     },
     {
       name: "LinkedIn",
